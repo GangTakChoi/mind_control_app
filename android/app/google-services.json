@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "722584399970",
+    "project_id": "mind-control-896e1",
+    "storage_bucket": "mind-control-896e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722584399970:android:cbcc654a899c13031aa13b",
+        "android_client_info": {
+          "package_name": "com.example.mind_control"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjT8aORq18Mwi3WA8TCJAn8IicHxLMbPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
