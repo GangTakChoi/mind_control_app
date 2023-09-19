@@ -1,10 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/screens/more_page.dart';
 import 'package:mind_control/screens/privacy_page.dart';
 import 'package:mind_control/screens/terms_page.dart';
-import 'package:month_year_picker/month_year_picker.dart';
+import 'package:mind_control/utils/dio_client.dart';
+// import 'package:month_year_picker/month_year_picker.dart';
 import 'screens/login_page.dart';
 import 'package:mind_control/screens/sign_up.dart';
 import 'package:mind_control/screens/view_days_page.dart';
@@ -14,7 +16,6 @@ import 'screens/write_day_page.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,10 +37,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => RootProvider())
       ],
       child: MaterialApp(
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          MonthYearPickerLocalizations.delegate,
-        ],
+        localizationsDelegates: [],
         title: 'Flutter Demo',
         theme: ThemeData(
           textTheme: TextTheme(bodyMedium: TextStyle(fontSize: 16.0)),

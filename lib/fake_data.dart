@@ -9,7 +9,7 @@ const String recordString =
 
 List<Task> tasks = [
   Task(title: '운동하기', isChecked: true),
-  Task(title: '책읽기', isChecked: true),
+  Task(title: '책읽기'),
   Task(title: '영어공부'),
   Task(title: '환기하기'),
 ];
@@ -17,7 +17,7 @@ List<Task> tasks = [
 List<Task> tasks2 = [
   Task(title: '운동하기', isChecked: true),
   Task(title: '책읽기'),
-  Task(title: '영어공부', isChecked: true),
+  Task(title: '영어공부'),
   Task(title: '환기하기', isChecked: true),
 ];
 
@@ -26,14 +26,6 @@ List<Task> tasks3 = [
   Task(title: '책읽기', isChecked: true),
   Task(title: '영어공부', isChecked: true),
   Task(title: '환기하기', isChecked: true),
-  Task(title: '운동하기2', isChecked: true),
-  Task(title: '책읽기2', isChecked: true),
-  Task(title: '영어공부2', isChecked: true),
-  Task(title: '환기하기2', isChecked: true),
-  Task(title: '운동하기3', isChecked: true),
-  Task(title: '책읽기3', isChecked: true),
-  Task(title: '영어공부3', isChecked: true),
-  Task(title: '환기하기3', isChecked: true),
 ];
 
 List<DayRecordBundle> fakeData = [
@@ -52,42 +44,42 @@ List<DayRecordBundle> fakeData = [
     tasks: tasks3,
     date: '4월 23일',
     feelingValue: FeelingValue.soHappy,
-    recordOfDay: '상쾌한 하루이구나~3',
+    recordOfDay: recordString,
   ),
   DayRecordBundle(
     tasks: tasks,
     date: '4월 24일',
     feelingValue: FeelingValue.soUnHappy,
-    recordOfDay: '상쾌한 하루이구나~4',
+    recordOfDay: recordString,
   ),
   DayRecordBundle(
     tasks: tasks2,
     date: '4월 25일',
     feelingValue: FeelingValue.littleBitHappy,
-    recordOfDay: '상쾌한 하루이구나~5',
+    recordOfDay: recordString,
   ),
   DayRecordBundle(
     tasks: tasks3,
     date: '4월 26일',
     feelingValue: FeelingValue.common,
-    recordOfDay: '상쾌한 하루이구나~6',
+    recordOfDay: recordString,
   ),
   DayRecordBundle(
     tasks: tasks,
     date: '4월 27일',
     feelingValue: FeelingValue.littleBitUnHappy,
-    recordOfDay: '상쾌한 하루이구나~7',
+    recordOfDay: recordString,
   ),
   DayRecordBundle(
     tasks: tasks2,
     date: '4월 28일',
     feelingValue: FeelingValue.common,
-    recordOfDay: '상쾌한 하루이구나~8 \n 상쾌한 하루이구나~8\n상쾌한 하루이구나~8',
+    recordOfDay: recordString,
   ),
   DayRecordBundle(
     tasks: tasks3,
     date: '4월 29일',
     feelingValue: FeelingValue.soUnHappy,
-    recordOfDay: '상쾌한 하루이구나~9',
+    recordOfDay: recordString,
   ),
 ];

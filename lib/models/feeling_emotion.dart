@@ -1,10 +1,10 @@
 import 'package:flutter_svg/flutter_svg.dart';
 
-const soHappy = 5;
-const littleBitHappy = 4;
-const common = 3;
-const littleBitUnHappy = 2;
-const soUnHappy = 1;
+const soHappy = 'SO_GOOD';
+const littleBitHappy = 'GOOD';
+const common = 'NORMAL';
+const littleBitUnHappy = 'BAD';
+const soUnHappy = 'SO_BAD';
 
 enum FeelingValue {
   soHappy,

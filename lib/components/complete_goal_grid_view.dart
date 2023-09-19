@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class CompleteGoalGridView extends StatelessWidget {
-  CompleteGoalGridView({required this.completeGoalList});
+  CompleteGoalGridView({super.key, required this.completeGoalList});
 
   List<String> completeGoalList = [];
 
@@ -26,7 +27,7 @@ class CompleteGoalGridView extends StatelessWidget {
 }
 
 class StaggeredGridWidget extends StatelessWidget {
-  StaggeredGridWidget({required this.completeGoalList});
+  StaggeredGridWidget({super.key, required this.completeGoalList});
 
   List<String> completeGoalList = [];
 

@@ -4,6 +4,7 @@ import 'package:mind_control/constants.dart';
 import 'package:mind_control/screens/sign_up.dart';
 import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/screens/write_day_page.dart';
+import 'package:mind_control/utils/dio_client.dart';
 
 class LoginPage extends StatelessWidget {
   static const String id = 'login_page';
@@ -57,8 +58,12 @@ class LoginPage extends StatelessWidget {
                     ),
                     PrimaryButton(
                       title: '로그인',
-                      onPressed: () {
-                        Navigator.pushNamed(context, WriteDayPage.id);
+                      onPressed: () async {
+                        // DioClient dioClient = DioClient();
+                        // // final response = await dioClient.get();
+
+                        // print(response);
+                        // Navigator.pushNamed(context, WriteDayPage.id);
                       },
                     ),
                     SizedBox(

@@ -4,6 +4,7 @@ import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_control/models/feeling_emotion.dart';
+import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/screens/view_days_page.dart';
 import 'package:mind_control/components/selectable_box.dart';
@@ -165,10 +166,13 @@ class _WriteDayPageState extends State<WriteDayPage> {
                     height: 30,
                   ),
                   PrimaryButton(
-                      title: '저장',
-                      onPressed: () {
-                        Navigator.pushNamed(context, ViewDaysPage.id);
-                      }),
+                    title: '저장',
+                    onPressed: () {
+                      Provider.of<RootProvider>(context, listen: false)
+                          .updateIndexForPage(context, 1);
+                      // Navigator.pushNamed(context, ViewDaysPage.id);
+                    },
+                  ),
                   SizedBox(
                     height: 30,
                   ),
