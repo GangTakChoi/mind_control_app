@@ -35,12 +35,11 @@ class _LoginPageState extends State<LoginPage> {
     String? token = await userService.login(accountId, password);
 
     if (token == null) {
+      if (!mounted) return;
       showDialog1(context, title: '로그인 실패', content: '일치하는 회원정보가 없습니다.');
       return;
     }
 
-    if (!mounted) return;
-    await showDialog1(context, title: '로그인 성공', content: '로그인이 완료되었습니다.');
     if (!mounted) return;
     Navigator.pushNamed(context, WriteDayPage.id);
   }
