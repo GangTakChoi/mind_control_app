@@ -1,18 +1,37 @@
+import 'package:dio/dio.dart';
 import 'package:mind_control/utils/dio_client.dart';
+import 'package:mind_control/utils/show_dialog.dart';
+import 'package:provider/provider.dart';
 
 class UserService {
   DioClient dioClient = DioClient();
 
-  Future<bool> getIsDuplicatedId(String accountId) async {
-    final data = {'accountId': accountId};
-    final res = await dioClient.post('users/checking-id', data);
+  Future<bool> getIsValidId(String accountId) async {
+    final res = await dioClient.get('/users/$accountId/verification');
 
-    if (res?.statusCode == 200) {
-      return res?.data?.isConflict ? true : false;
+    if (res.statusCode == 200) {
+      return res.data['isConflict'] ? false : true;
     }
 
     return false;
   }
 
-  create() {}
+  Future<Response<dynamic>> create(Map<String, String> data) async {
+    final res = await dioClient.post('/users', data);
+
+    return res;
+  }
+
+  Future<String?> login(String username, String password) async {
+    try {
+      final data = {'username': username, 'password': password};
+      final res = await dioClient.post('/auth/login', data);
+      if (res.statusCode == 201) {
+        return res.data['access_token'];
+      }
+    } on DioException {
+      return null;
+    }
+    return null;
+  }
 }

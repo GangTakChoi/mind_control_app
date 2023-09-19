@@ -4,13 +4,46 @@ import 'package:mind_control/constants.dart';
 import 'package:mind_control/screens/sign_up.dart';
 import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/screens/write_day_page.dart';
-import 'package:mind_control/utils/dio_client.dart';
+import 'package:mind_control/services/user_service.dart';
+import 'package:mind_control/utils/show_dialog.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   static const String id = 'login_page';
-  const LoginPage({
+  LoginPage({
     super.key,
   });
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String accountId = '';
+  String password = '';
+  UserService userService = UserService();
+
+  void login() async {
+    if (accountId.isEmpty) {
+      showDialog1(context, title: '아이디 미입력', content: '아이디를 입력해주세요.');
+      return;
+    }
+    if (password.isEmpty) {
+      showDialog1(context, title: '패스워드 미입력', content: '패스워드를 입력해주세요.');
+      return;
+    }
+
+    String? token = await userService.login(accountId, password);
+
+    if (token == null) {
+      showDialog1(context, title: '로그인 실패', content: '일치하는 회원정보가 없습니다.');
+      return;
+    }
+
+    if (!mounted) return;
+    await showDialog1(context, title: '로그인 성공', content: '로그인이 완료되었습니다.');
+    if (!mounted) return;
+    Navigator.pushNamed(context, WriteDayPage.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +78,9 @@ class LoginPage extends StatelessWidget {
                   children: [
                     TextField(
                       decoration: kTextFieldDecoration,
+                      onChanged: (value) {
+                        accountId = value;
+                      },
                     ),
                     SizedBox(
                       height: 10.0,
@@ -52,6 +88,9 @@ class LoginPage extends StatelessWidget {
                     TextField(
                       obscureText: true,
                       decoration: kTextFieldDecoration,
+                      onChanged: (value) {
+                        password = value;
+                      },
                     ),
                     SizedBox(
                       height: 50.0,
@@ -59,11 +98,7 @@ class LoginPage extends StatelessWidget {
                     PrimaryButton(
                       title: '로그인',
                       onPressed: () async {
-                        // DioClient dioClient = DioClient();
-                        // // final response = await dioClient.get();
-
-                        // print(response);
-                        // Navigator.pushNamed(context, WriteDayPage.id);
+                        login();
                       },
                     ),
                     SizedBox(

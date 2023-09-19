@@ -9,24 +9,24 @@ class DioClient extends Interceptor {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
-          // print('======================================================');
+          print('======================================================');
           print(
               'REQUEST[${options.method}] => URI: ${options.baseUrl}${options.path}');
-          print('======================================================');
 
           return handler.next(options);
         },
         onResponse: (Response response, ResponseInterceptorHandler handler) {
-          print('======================================================');
           print(
               'RESPONSE[${response.statusCode}] => URI: ${response.requestOptions.baseUrl}${response.requestOptions.path}');
+
+          print('RESPONSE DATA => ${response.data}');
 
           return handler.next(response);
         },
         onError: (DioException err, ErrorInterceptorHandler handler) {
-          print('======================================================');
           print(
-              'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+              'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.baseUrl}${err.requestOptions.path}');
+          print('ERROR DATA => ${err.response?.data}');
 
           return handler.next(err);
         },
