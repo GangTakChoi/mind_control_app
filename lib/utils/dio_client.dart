@@ -48,4 +48,9 @@ class DioClient extends Interceptor {
     final res = await dio.post(path, data: data);
     return res;
   }
+
+  Future<Response<dynamic>> delete(String path, int id) async {
+    final res = await dio.delete('$path/$id');
+    return res;
+  }
 }

@@ -12,6 +12,8 @@ class WriteDayProvider extends ChangeNotifier {
   List<Task> _task = [];
   String recordOfDay = '';
 
+  GoalService goalService = GoalService();
+
   UnmodifiableListView<Task> get tasks {
     return UnmodifiableListView(_task);
   }
@@ -35,17 +37,17 @@ class WriteDayProvider extends ChangeNotifier {
 
   void setTasks() async {
     refreshTasks();
-    GoalService goalService = GoalService();
     final goalList = await goalService.getGoalList();
     for (dynamic goalInfo in goalList) {
       Task task = Task(id: goalInfo['id'], title: goalInfo['content']);
       _task.add(task);
     }
-    print('setTasks');
     notifyListeners();
   }
 
-  void deleteTask(Task taskToDelete) {
+  void deleteTask(Task taskToDelete) async {
+    final taskId = taskToDelete.id;
+    await goalService.delete(taskId);
     _task.remove(taskToDelete);
     notifyListeners();
   }
