@@ -15,6 +15,12 @@ class GoalMgmtPage extends StatefulWidget {
 
 class _GoalMgmtPageState extends State<GoalMgmtPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

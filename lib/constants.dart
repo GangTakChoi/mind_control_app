@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mind_control/models/feeling_emotion.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];

@@ -1,12 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/screens/more_page.dart';
 import 'package:mind_control/screens/privacy_page.dart';
 import 'package:mind_control/screens/terms_page.dart';
-import 'package:mind_control/utils/dio_client.dart';
-// import 'package:month_year_picker/month_year_picker.dart';
 import 'screens/login_page.dart';
 import 'package:mind_control/screens/sign_up.dart';
 import 'package:mind_control/screens/view_days_page.dart';

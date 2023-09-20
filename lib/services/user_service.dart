@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mind_control/utils/dio_client.dart';
-import 'package:mind_control/utils/show_dialog.dart';
-import 'package:provider/provider.dart';
 
 class UserService {
   DioClient dioClient = DioClient();
@@ -27,7 +26,11 @@ class UserService {
       final data = {'username': username, 'password': password};
       final res = await dioClient.post('/auth/login', data);
       if (res.statusCode == 201) {
-        return res.data['access_token'];
+        final token = res.data['access_token'];
+        final storage = FlutterSecureStorage();
+        storage.write(key: 'token', value: token);
+
+        return token;
       }
     } on DioException {
       return null;

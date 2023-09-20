@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_control/models/task.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
+import 'package:mind_control/services/goal_service.dart';
 import 'package:provider/provider.dart';
 
 class AddGoalScreen extends StatelessWidget {
@@ -34,6 +35,10 @@ class AddGoalScreen extends StatelessWidget {
                 Task newTask = Task(title: addingTaskText);
                 Provider.of<WriteDayProvider>(context, listen: false)
                     .addTask(newTask);
+
+                GoalService goalService = GoalService();
+                goalService.create(addingTaskText);
+
                 Navigator.pop(context);
               },
               child: Text(

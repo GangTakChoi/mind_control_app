@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/constants.dart';
 
 class InputTextWithLabel extends StatelessWidget {
@@ -15,7 +14,7 @@ class InputTextWithLabel extends StatelessWidget {
   final String? detailLable;
   final bool isObscureText;
   final void Function(String)? onChanged;
-  List<TextInputFormatter>? filteringTextList = [];
+  final List<TextInputFormatter>? filteringTextList;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,6 @@ class InputTextWithLabel extends StatelessWidget {
               ),
             ],
           ),
-
           SizedBox(
             height: 10,
           ),
@@ -47,11 +45,6 @@ class InputTextWithLabel extends StatelessWidget {
             onChanged: onChanged,
             inputFormatters: filteringTextList,
           ),
-          // TextField(
-          //   obscureText: isObscureText,
-          //   decoration: kTextFieldDecoration,
-          //   onChanged: (value) => print(value),
-          // )
         ],
       ),
     );

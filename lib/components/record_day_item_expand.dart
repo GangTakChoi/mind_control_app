@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_control/components/goal_checking_list_tile.dart';
 import 'package:mind_control/models/day_record_bundle.dart';
-import 'package:mind_control/providers/write_day_provider.dart';
-import 'package:provider/provider.dart';
 
 class RecordDayItemExpand extends StatelessWidget {
   const RecordDayItemExpand({

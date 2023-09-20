@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 class MyBottomNavigationBar extends StatelessWidget {
   MyBottomNavigationBar({required this.context});
 
-  BuildContext context;
+  final BuildContext context;
 
   @override
   Widget build(BuildContext context) {

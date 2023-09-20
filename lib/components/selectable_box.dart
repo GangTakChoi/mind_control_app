@@ -8,9 +8,8 @@ class SelectableBox extends StatelessWidget {
   SelectableBox({required this.child, required this.feelingValue});
 
   final Widget child;
-  FeelingValue feelingValue;
+  final FeelingValue feelingValue;
 
-  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Consumer(

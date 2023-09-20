@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mind_control/components/complete_goal_grid_view.dart';
-import 'package:mind_control/components/goal_checking_list_tile.dart';
 import 'package:mind_control/components/record_day_item_expand.dart';
 import 'package:mind_control/constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_control/models/day_record_bundle.dart';
-import 'package:mind_control/providers/write_day_provider.dart';
-import 'package:provider/provider.dart';
 
 class RecordDayItem extends StatefulWidget {
   RecordDayItem({required this.dayRecordBundle});
 
-  DayRecordBundle dayRecordBundle;
+  final DayRecordBundle dayRecordBundle;
 
   @override
   State<RecordDayItem> createState() => _RecordDayItemState();

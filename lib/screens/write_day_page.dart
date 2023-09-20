@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mind_control/components/my_bottom_navigation_bar.dart';
 import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_control/models/feeling_emotion.dart';
 import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
-import 'package:mind_control/screens/view_days_page.dart';
 import 'package:mind_control/components/selectable_box.dart';
 import 'package:mind_control/screens/goal_mgmt_page.dart';
 import 'package:provider/provider.dart';
@@ -103,8 +101,9 @@ class _WriteDayPageState extends State<WriteDayPage> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, GoalMgmtPage.id);
+                            onPressed: () async {
+                              await Navigator.pushNamed(
+                                  context, GoalMgmtPage.id);
                             },
                             child: Text(
                               '목표관리',
