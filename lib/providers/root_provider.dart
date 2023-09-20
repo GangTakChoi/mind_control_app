@@ -12,7 +12,6 @@ class RootProvider extends ChangeNotifier {
   void updateIndexForPage(BuildContext context, int index) {
     _indexOfPage = index;
     if (index == 0) {
-      // Navigator.maybePop(context, WriteDayPage());
       Navigator.pushNamed(context, WriteDayPage.id);
     } else if (index == 1) {
       Navigator.pushNamed(context, ViewDaysPage.id);

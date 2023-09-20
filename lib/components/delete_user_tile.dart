@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mind_control/services/user_service.dart';
+import 'package:mind_control/utils/show_dialog.dart';
 
 class DeleteUserTile extends StatelessWidget {
   const DeleteUserTile({
     super.key,
   });
+
+  void deleteMe(context) async {
+    UserService userService = UserService();
+    final isSuccess = await userService.delete();
+    if (isSuccess) {
+      await showDialog1(context, title: '탈퇴완료', content: '탈퇴가 완료되었습니다.');
+      Navigator.popUntil(context, (route) => route.isFirst);
+    } else {
+      await showDialog1(context,
+          title: '오류발생',
+          content: '탈퇴를 실패하였습니다.\n문제가 지속되는 경우 재 로그인하여 다시 시도해주세요.');
+      final storage = FlutterSecureStorage();
+      storage.delete(key: 'token');
+      Navigator.pop(context);
+      return;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +59,8 @@ class DeleteUserTile extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {
-                Navigator.pop(context, 'OK');
+              onPressed: () async {
+                deleteMe(context);
               },
               child: const Text(
                 '탈퇴',

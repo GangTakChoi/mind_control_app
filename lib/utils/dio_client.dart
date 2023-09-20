@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mind_control/utils/show_dialog.dart';
+import 'package:oktoast/oktoast.dart';
 
 class DioClient extends Interceptor {
   static Dio dio = Dio();
@@ -13,8 +16,10 @@ class DioClient extends Interceptor {
       InterceptorsWrapper(
         onRequest:
             (RequestOptions options, RequestInterceptorHandler handler) async {
+          print('===========================================');
           print(
               'REQUEST[${options.method}] => URI: ${options.baseUrl}${options.path}');
+          print('REQUEST[body] => ${options.data}');
 
           final token = await FlutterSecureStorage().read(key: 'token');
           if (token != null) {
@@ -34,6 +39,11 @@ class DioClient extends Interceptor {
               'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.baseUrl}${err.requestOptions.path}');
           print('ERROR DATA => ${err.response?.data}');
 
+          if (err.response?.statusCode == 401 &&
+              err.requestOptions.path != '/auth/login') {
+            showToast('인가된 요청이 아닙니다.', position: ToastPosition.bottom);
+          }
+
           return handler.next(err);
         },
       ),
@@ -49,8 +59,8 @@ class DioClient extends Interceptor {
     return res;
   }
 
-  Future<Response<dynamic>> delete(String path, int id) async {
-    final res = await dio.delete('$path/$id');
+  Future<Response<dynamic>> delete(String path) async {
+    final res = await dio.delete(path);
     return res;
   }
 }

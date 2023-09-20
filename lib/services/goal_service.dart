@@ -17,7 +17,7 @@ class GoalService {
   }
 
   delete(int id) async {
-    final res = await dioClient.delete('/goals', id);
+    final res = await dioClient.delete('/goals/$id');
     return res;
   }
 }

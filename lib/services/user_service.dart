@@ -37,4 +37,14 @@ class UserService {
     }
     return null;
   }
+
+  Future<bool> delete() async {
+    final res = await dioClient.delete('/users/me');
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

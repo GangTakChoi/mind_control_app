@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+const soHappy = 'SO_GOOD';
+const littleBitHappy = 'GOOD';
+const common = 'NORMAL';
+const littleBitUnHappy = 'BAD';
+const soUnHappy = 'SO_BAD';
+
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};

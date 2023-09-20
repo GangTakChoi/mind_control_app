@@ -2,8 +2,8 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:mind_control/models/feeling_emotion.dart';
-import 'package:provider/provider.dart';
 import 'package:mind_control/models/task.dart';
+import 'package:mind_control/constants.dart';
 
 import '../services/goal_service.dart';
 
@@ -24,6 +24,21 @@ class WriteDayProvider extends ChangeNotifier {
 
   FeelingValue get currentfeelingValue {
     return _currentFeelingValue;
+  }
+
+  String getFeelingWithString() {
+    switch (_currentFeelingValue) {
+      case FeelingValue.soHappy:
+        return soHappy;
+      case FeelingValue.littleBitHappy:
+        return littleBitHappy;
+      case FeelingValue.common:
+        return common;
+      case FeelingValue.littleBitUnHappy:
+        return littleBitUnHappy;
+      case FeelingValue.soUnHappy:
+        return soUnHappy;
+    }
   }
 
   void updateFeelingValue(FeelingValue changedFeelingValue) {
