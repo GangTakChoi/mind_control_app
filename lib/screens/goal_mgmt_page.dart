@@ -63,12 +63,18 @@ class _GoalMgmtPageState extends State<GoalMgmtPage> {
         child: Consumer<WriteDayProvider>(
           builder: (context, writeDayProvider, child) => ListView.builder(
             padding: EdgeInsets.only(top: 30),
+            scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
+              if (writeDayProvider.taskCount == index) {
+                return SizedBox(
+                  height: 110,
+                );
+              }
               return GoalListItem(
                 task: writeDayProvider.tasks[index],
               );
             },
-            itemCount: writeDayProvider.taskCount,
+            itemCount: writeDayProvider.taskCount + 1,
           ),
         ),
       ),

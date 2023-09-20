@@ -9,4 +9,10 @@ class GoalService {
 
     return res;
   }
+
+  getGoalList() async {
+    final res = await dioClient.get('/goals');
+
+    return res.data;
+  }
 }

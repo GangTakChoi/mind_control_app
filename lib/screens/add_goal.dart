@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mind_control/models/task.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/services/goal_service.dart';
 import 'package:provider/provider.dart';
@@ -30,14 +29,14 @@ class AddGoalScreen extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8)),
-              onPressed: () {
+              onPressed: () async {
                 if (addingTaskText == '') return;
-                Task newTask = Task(title: addingTaskText);
-                Provider.of<WriteDayProvider>(context, listen: false)
-                    .addTask(newTask);
 
                 GoalService goalService = GoalService();
-                goalService.create(addingTaskText);
+                await goalService.create(addingTaskText);
+
+                Provider.of<WriteDayProvider>(context, listen: false)
+                    .setTasks();
 
                 Navigator.pop(context);
               },

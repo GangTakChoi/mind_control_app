@@ -8,24 +8,24 @@ const String recordString =
 초등학교 1학년까진 보통 그림일기를 쓰고, 초등학교 고학년 이후로는 줄공책에 일기를 쓰게 된다. 성인이 돼서는 쓰는 사람이 매우 드물지만 쓰는 사람들은 디지털 기기(노트북, 휴대폰, 태블릿 등)를 사용하거나 수첩에 개인적으로 기록하는 경향이 잦다.""";
 
 List<Task> tasks = [
-  Task(title: '운동하기', isChecked: true),
-  Task(title: '책읽기'),
-  Task(title: '영어공부'),
-  Task(title: '환기하기'),
+  Task(id: 1, title: '운동하기', isChecked: true),
+  Task(id: 2, title: '책읽기'),
+  Task(id: 3, title: '영어공부'),
+  Task(id: 4, title: '환기하기'),
 ];
 
 List<Task> tasks2 = [
-  Task(title: '운동하기', isChecked: true),
-  Task(title: '책읽기'),
-  Task(title: '영어공부'),
-  Task(title: '환기하기', isChecked: true),
+  Task(id: 5, title: '운동하기', isChecked: true),
+  Task(id: 6, title: '책읽기'),
+  Task(id: 7, title: '영어공부'),
+  Task(id: 8, title: '환기하기', isChecked: true),
 ];
 
 List<Task> tasks3 = [
-  Task(title: '운동하기', isChecked: true),
-  Task(title: '책읽기', isChecked: true),
-  Task(title: '영어공부', isChecked: true),
-  Task(title: '환기하기', isChecked: true),
+  Task(id: 9, title: '운동하기', isChecked: true),
+  Task(id: 10, title: '책읽기', isChecked: true),
+  Task(id: 11, title: '영어공부', isChecked: true),
+  Task(id: 12, title: '환기하기', isChecked: true),
 ];
 
 List<DayRecordBundle> fakeData = [

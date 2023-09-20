@@ -7,8 +7,11 @@ import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/components/selectable_box.dart';
 import 'package:mind_control/screens/goal_mgmt_page.dart';
+import 'package:mind_control/services/goal_service.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_control/components/goal_checking_list.dart';
+
+import '../models/task.dart';
 
 class WriteDayPage extends StatefulWidget {
   static const String id = 'write_day_page';
@@ -28,6 +31,14 @@ class _WriteDayPageState extends State<WriteDayPage> {
     super.initState();
     recordOfDayInputContrl.text =
         Provider.of<WriteDayProvider>(context, listen: false).recordOfDay;
+
+    Future.delayed(Duration.zero, () {
+      loadGoalList();
+    });
+  }
+
+  void loadGoalList() {
+    Provider.of<WriteDayProvider>(context, listen: false).setTasks();
   }
 
   bool get isDisplayDivider {
@@ -104,6 +115,7 @@ class _WriteDayPageState extends State<WriteDayPage> {
                             onPressed: () async {
                               await Navigator.pushNamed(
                                   context, GoalMgmtPage.id);
+                              loadGoalList();
                             },
                             child: Text(
                               '목표관리',

@@ -1,8 +1,9 @@
 class Task {
+  int id;
   String title;
   bool isChecked;
 
-  Task({required this.title, this.isChecked = false});
+  Task({required this.id, required this.title, this.isChecked = false});
 
   void toggleCheckingState() {
     isChecked = !isChecked;
