@@ -1,12 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:mind_control/utils/show_dialog.dart';
 import 'package:oktoast/oktoast.dart';
 
 class DioClient extends Interceptor {
   static Dio dio = Dio();
-  DioClient({baseUrl = 'http://localhost:3000'}) {
+  DioClient({baseUrl = 'https://mind-api.choikt.com:3000'}) {
     if (dio.options.baseUrl.isNotEmpty) return;
 
     dio.options.baseUrl = baseUrl;
@@ -40,9 +38,12 @@ class DioClient extends Interceptor {
           print('ERROR DATA => ${err.response?.data}');
 
           if (err.response?.statusCode == 401 &&
-              err.requestOptions.path != '/auth/login') {
-            showToast('인가된 요청이 아닙니다.', position: ToastPosition.bottom);
+              err.requestOptions.path == '/auth/login') {
+            return handler.next(err);
           }
+
+          showToast('오류가 발생하였습니다.\n문제가 지속될 경우 앱을 재시동해주세요.',
+              position: ToastPosition.bottom);
 
           return handler.next(err);
         },
@@ -54,9 +55,13 @@ class DioClient extends Interceptor {
     return res;
   }
 
-  Future<Response<dynamic>> post(String path, Map<String, dynamic> data) async {
-    final res = await dio.post(path, data: data);
-    return res;
+  Future<dynamic> post(String path, Map<String, dynamic> data) async {
+    try {
+      final res = await dio.post(path, data: data);
+      return res;
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<Response<dynamic>> delete(String path) async {

@@ -5,16 +5,17 @@ import 'package:mind_control/models/feeling_emotion.dart';
 import 'package:mind_control/models/task.dart';
 import 'package:mind_control/constants.dart';
 
+import '../models/diary.dart';
 import '../services/goal_service.dart';
 
 class WriteDayProvider extends ChangeNotifier {
   FeelingValue _currentFeelingValue = FeelingValue.soHappy;
-  List<Task> _task = [];
+  List<Goal> _task = [];
   String recordOfDay = '';
 
   GoalService goalService = GoalService();
 
-  UnmodifiableListView<Task> get tasks {
+  UnmodifiableListView<Goal> get tasks {
     return UnmodifiableListView(_task);
   }
 
@@ -41,6 +42,12 @@ class WriteDayProvider extends ChangeNotifier {
     }
   }
 
+  void init() {
+    recordOfDay = '';
+    _currentFeelingValue = FeelingValue.soHappy;
+    notifyListeners();
+  }
+
   void updateFeelingValue(FeelingValue changedFeelingValue) {
     _currentFeelingValue = changedFeelingValue;
     notifyListeners();
@@ -54,20 +61,20 @@ class WriteDayProvider extends ChangeNotifier {
     refreshTasks();
     final goalList = await goalService.getGoalList();
     for (dynamic goalInfo in goalList) {
-      Task task = Task(id: goalInfo['id'], title: goalInfo['content']);
+      Goal task = Goal(id: goalInfo['id'], title: goalInfo['content']);
       _task.add(task);
     }
     notifyListeners();
   }
 
-  void deleteTask(Task taskToDelete) async {
+  void deleteTask(Goal taskToDelete) async {
     final taskId = taskToDelete.id;
     await goalService.delete(taskId);
     _task.remove(taskToDelete);
     notifyListeners();
   }
 
-  void toggleTaskCheckingState(Task task) {
+  void toggleTaskCheckingState(Goal task) {
     task.toggleCheckingState();
     notifyListeners();
   }

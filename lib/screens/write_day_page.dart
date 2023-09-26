@@ -7,8 +7,7 @@ import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/components/selectable_box.dart';
 import 'package:mind_control/screens/goal_mgmt_page.dart';
-import 'package:mind_control/services/daily_service.dart';
-import 'package:mind_control/services/goal_service.dart';
+import 'package:mind_control/services/diary_service.dart';
 import 'package:mind_control/utils/show_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_control/components/goal_checking_list.dart';
@@ -44,19 +43,20 @@ class _WriteDayPageState extends State<WriteDayPage> {
   }
 
   void save() async {
-    final List<Task> tasks =
+    final List<Goal> tasks =
         Provider.of<WriteDayProvider>(context, listen: false).tasks;
     final String content =
         Provider.of<WriteDayProvider>(context, listen: false).recordOfDay;
     final String feeling = Provider.of<WriteDayProvider>(context, listen: false)
         .getFeelingWithString();
 
-    DailyService dailyService = DailyService();
+    DiaryService dailyService = DiaryService();
 
     final res = await dailyService.create(content, feeling, tasks);
 
     if (res.statusCode == 201) {
       await showDialog1(context, title: '저장완료', content: '저장완료 되었습니다!');
+      Provider.of<WriteDayProvider>(context, listen: false).init();
       Provider.of<RootProvider>(context, listen: false)
           .updateIndexForPage(context, 1);
     } else {

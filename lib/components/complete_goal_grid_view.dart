@@ -48,7 +48,8 @@ class StaggeredGridWidget extends StatelessWidget {
           completeGoalList.length,
           (index) {
             return Container(
-              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 6),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Color(0xffC8C7FF),

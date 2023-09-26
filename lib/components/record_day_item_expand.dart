@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mind_control/components/goal_checking_list_tile.dart';
-import 'package:mind_control/models/day_record_bundle.dart';
+import 'package:mind_control/models/diary.dart';
 
-class RecordDayItemExpand extends StatelessWidget {
-  const RecordDayItemExpand({
+class DiaryItemExpand extends StatelessWidget {
+  const DiaryItemExpand({
     super.key,
-    required this.dayRecordBundle,
+    required this.diary,
   });
 
-  final DayRecordBundle dayRecordBundle;
+  final Diary diary;
 
-  String? get recordOfDayText {
-    return dayRecordBundle.recordOfDay;
+  String get content {
+    return diary.content;
   }
 
   @override
@@ -31,9 +31,9 @@ class RecordDayItemExpand extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              itemCount: dayRecordBundle.taskCount,
+              itemCount: diary.taskCount,
               itemBuilder: (context, index) => GoalCheckingListTile(
-                task: dayRecordBundle.tasks[index],
+                task: diary.tasks[index],
                 density: -4,
               ),
             ),
@@ -41,25 +41,21 @@ class RecordDayItemExpand extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
+          if (content.isNotEmpty)
+            Container(
+              padding: EdgeInsets.all(16.0),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
               ),
-            ),
-            child: recordOfDayText == null
-                ? Text(
-                    '작성된 내용이 없습니다.',
-                    style: TextStyle(fontSize: 17, color: Colors.black45),
-                  )
-                : Text(
-                    recordOfDayText ?? '',
-                    style: TextStyle(fontSize: 17),
-                  ),
-          )
+              child: Text(
+                content,
+                style: TextStyle(fontSize: 17),
+              ),
+            )
         ],
       ),
     );

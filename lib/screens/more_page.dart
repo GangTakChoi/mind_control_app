@@ -29,42 +29,45 @@ class MorePage extends StatelessWidget {
           child: Column(
             children: [
               Header(title: '더보기'),
-              ListView(
-                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
-                shrinkWrap: true,
-                children: [
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                    leading: SvgPicture.asset('images/goal_icon.svg'),
-                    title: Text(
-                      '목표 관리',
-                      style: TextStyle(fontSize: 22),
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
+                  shrinkWrap: true,
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                      leading: SvgPicture.asset('images/goal_icon.svg'),
+                      title: Text(
+                        '목표 관리',
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      onTap: () =>
+                          Navigator.pushNamed(context, GoalMgmtPage.id),
                     ),
-                    onTap: () => Navigator.pushNamed(context, GoalMgmtPage.id),
-                  ),
-                  getDivider(),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                    leading: SvgPicture.asset('images/security.svg'),
-                    title: Text(
-                      '개인정보처리방침',
-                      style: TextStyle(fontSize: 22),
+                    getDivider(),
+                    ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                      leading: SvgPicture.asset('images/security.svg'),
+                      title: Text(
+                        '개인정보처리방침',
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      onTap: () => Navigator.pushNamed(context, PrivacyPage.id),
                     ),
-                    onTap: () => Navigator.pushNamed(context, PrivacyPage.id),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                    leading: SvgPicture.asset('images/document.svg'),
-                    title: Text(
-                      '이용약관',
-                      style: TextStyle(fontSize: 22),
-                    ),
-                    onTap: () => Navigator.pushNamed(context, TermsPage.id),
-                  ),
-                  getDivider(),
-                  LogoutTile(),
-                  DeleteUserTile(),
-                ],
+                    // ListTile(
+                    //   contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                    //   leading: SvgPicture.asset('images/document.svg'),
+                    //   title: Text(
+                    //     '이용약관',
+                    //     style: TextStyle(fontSize: 22),
+                    //   ),
+                    //   onTap: () => Navigator.pushNamed(context, TermsPage.id),
+                    // ),
+                    getDivider(),
+                    LogoutTile(),
+                    DeleteUserTile(),
+                  ],
+                ),
               )
             ],
           ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class PrivacyPage extends StatelessWidget {
   static const String id = 'privacy_page';
-  const PrivacyPage({super.key});
+  PrivacyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,12 @@ class PrivacyPage extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Text('개인정보처리방침 페이지'),
+      body: InAppWebView(
+        initialUrlRequest: URLRequest(
+          url: Uri.parse('https://sites.google.com/view/diary-day/%ED%99%88'),
         ),
+        initialOptions: InAppWebViewGroupOptions(
+            android: AndroidInAppWebViewOptions(useHybridComposition: true)),
       ),
     );
   }

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class GoalListItem extends StatelessWidget {
   GoalListItem({required this.task});
 
-  final Task task;
+  final Goal task;
 
   @override
   Widget build(BuildContext context) {

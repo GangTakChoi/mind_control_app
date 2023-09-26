@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:mind_control/components/complete_goal_grid_view.dart';
 import 'package:mind_control/components/record_day_item_expand.dart';
 import 'package:mind_control/constants.dart';
-import 'package:mind_control/models/day_record_bundle.dart';
+import 'package:mind_control/models/diary.dart';
+import 'package:mind_control/services/diary_service.dart';
+import 'package:mind_control/utils/show_dialog.dart';
+import 'package:oktoast/oktoast.dart';
 
-class RecordDayItem extends StatefulWidget {
-  RecordDayItem({required this.dayRecordBundle});
+class DiaryItem extends StatefulWidget {
+  DiaryItem({required this.diary, required this.removeDiary});
 
-  final DayRecordBundle dayRecordBundle;
+  final Diary diary;
+  Function removeDiary;
 
   @override
-  State<RecordDayItem> createState() => _RecordDayItemState();
+  State<DiaryItem> createState() => _DiaryItemState();
 }
 
-class _RecordDayItemState extends State<RecordDayItem> {
+class _DiaryItemState extends State<DiaryItem> {
   bool isExpanded = false;
 
   void toggleExpandedState() {
@@ -22,24 +26,59 @@ class _RecordDayItemState extends State<RecordDayItem> {
     });
   }
 
+  void removeDiary() async {
+    final diaryId = widget.diary.id;
+    final res = await DiaryService.delete(diaryId);
+    if (res.statusCode == 200) {
+      widget.removeDiary(diaryId);
+      showToast('삭제 완료', position: ToastPosition.bottom);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: Text(
-            widget.dayRecordBundle.date,
-            style: TextStyle(color: Colors.white),
-          ),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Text(
+                widget.diary.date,
+                style: TextStyle(color: Colors.white),
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
             ),
-          ),
+            InkWell(
+              onTap: () {
+                showDialogConfirm(context, removeDiary,
+                    title: '기록 삭제', content: '기록을 삭제하시겠습니까?', actionText: '삭제');
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                ),
+                child: Icon(
+                  Icons.delete_outline,
+                  size: 21,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          ],
         ),
         Container(
           width: double.infinity,
@@ -48,7 +87,6 @@ class _RecordDayItemState extends State<RecordDayItem> {
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(10),
               bottomRight: Radius.circular(10),
-              topRight: Radius.circular(10),
             ),
           ),
           child: Column(
@@ -58,13 +96,12 @@ class _RecordDayItemState extends State<RecordDayItem> {
                 height: 70,
                 child: Row(
                   children: [
-                    widget.dayRecordBundle.getIconForFeelingValue(),
+                    widget.diary.getIconForFeelingValue(),
                     SizedBox(
                       width: 8,
                     ),
                     CompleteGoalGridView(
-                      completeGoalList:
-                          widget.dayRecordBundle.getCompleteGoalList(),
+                      completeGoalList: widget.diary.getCompleteGoalList(),
                     ),
                     SizedBox(
                       width: 5,
@@ -86,8 +123,7 @@ class _RecordDayItemState extends State<RecordDayItem> {
                   ],
                 ),
               ),
-              if (isExpanded)
-                RecordDayItemExpand(dayRecordBundle: widget.dayRecordBundle)
+              if (isExpanded) DiaryItemExpand(diary: widget.diary)
             ],
           ),
         )

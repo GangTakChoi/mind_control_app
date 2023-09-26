@@ -5,7 +5,7 @@ class GoalCheckingListTile extends StatelessWidget {
   GoalCheckingListTile(
       {super.key, required this.task, this.onChanged, this.density = -2});
 
-  final Task task;
+  final Goal task;
   final void Function(bool?)? onChanged;
   final double density;
 
