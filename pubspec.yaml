@@ -44,6 +44,7 @@ dependencies:
   oktoast: ^3.3.1
   intl: ^0.18.1
   flutter_inappwebview: ^5.7.2+3
+  change_app_package_name: ^1.1.0
 
 dev_dependencies:
   flutter_test:

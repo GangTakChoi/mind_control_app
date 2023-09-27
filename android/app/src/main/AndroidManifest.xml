@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mind_control">
+    package="com.choikt.mind_control">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="하루의 기록"

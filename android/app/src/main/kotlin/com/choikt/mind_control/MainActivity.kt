@@ -1,4 +1,4 @@
-package com.example.mind_control
+package com.choikt.mind_control
 
 import io.flutter.embedding.android.FlutterActivity
 
