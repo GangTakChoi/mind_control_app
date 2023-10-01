@@ -41,10 +41,11 @@ dependencies:
   http: ^1.1.0
   dio: ^5.3.2
   flutter_secure_storage: ^9.0.0
-  oktoast: ^3.3.1
   intl: ^0.18.1
   flutter_inappwebview: ^5.7.2+3
   change_app_package_name: ^1.1.0
+  fluttertoast: ^8.2.2
+  package_info_plus: ^4.1.0
 
 dev_dependencies:
   flutter_test:

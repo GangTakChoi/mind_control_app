@@ -5,7 +5,8 @@ import 'package:mind_control/constants.dart';
 import 'package:mind_control/models/diary.dart';
 import 'package:mind_control/services/diary_service.dart';
 import 'package:mind_control/utils/show_dialog.dart';
-import 'package:oktoast/oktoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mind_control/utils/toast.dart';
 
 class DiaryItem extends StatefulWidget {
   DiaryItem({required this.diary, required this.removeDiary});
@@ -31,7 +32,7 @@ class _DiaryItemState extends State<DiaryItem> {
     final res = await DiaryService.delete(diaryId);
     if (res.statusCode == 200) {
       widget.removeDiary(diaryId);
-      showToast('삭제 완료', position: ToastPosition.bottom);
+      CustomToast.showToastNormalType('삭제완료');
     }
   }
 
