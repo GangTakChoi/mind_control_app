@@ -28,8 +28,8 @@ class Diary {
       required this.mindState});
 
   factory Diary.fromJson(Map<String, dynamic> json) {
-    String date =
-        DateFormat("yyyy년 MM월 dd일").format(DateTime.parse(json['createdAt']));
+    String date = DateFormat("yyyy/MM/dd HH:MM")
+        .format(DateTime.parse(json['createdAt']).toLocal());
     return Diary(
       id: json["id"],
       content: json["content"],

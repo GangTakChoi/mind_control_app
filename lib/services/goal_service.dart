@@ -1,23 +1,21 @@
 import 'package:mind_control/utils/dio_client.dart';
 
 class GoalService {
-  DioClient dioClient = DioClient();
-
   create(String content) async {
     final data = {'content': content};
-    final res = await dioClient.post('/goals', data);
+    final res = await DioClient.post('/goals', data);
 
     return res;
   }
 
   getGoalList() async {
-    final res = await dioClient.get('/goals');
+    final res = await DioClient.get('/goals');
 
     return res.data;
   }
 
   delete(String id) async {
-    final res = await dioClient.delete('/goals/$id');
+    final res = await DioClient.delete('/goals/$id');
     return res;
   }
 }

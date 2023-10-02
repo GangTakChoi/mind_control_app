@@ -133,10 +133,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Expanded(child: SizedBox()),
-              SizedBox(
-                child: Text(
-                  'version $appVersion',
-                  style: TextStyle(color: Colors.grey, fontSize: 14),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: SizedBox(
+                  child: Text(
+                    'version $appVersion',
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
                 ),
               )
               // Container(

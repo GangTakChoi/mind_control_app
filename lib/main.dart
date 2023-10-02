@@ -4,6 +4,7 @@ import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/screens/more_page.dart';
 import 'package:mind_control/screens/privacy_page.dart';
 import 'package:mind_control/screens/terms_page.dart';
+import 'package:mind_control/utils/dio_client.dart';
 import 'screens/login_page.dart';
 import 'package:mind_control/screens/sign_up.dart';
 import 'package:mind_control/screens/view_days_page.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  DioClient();
   runApp(const MyApp());
 }
 

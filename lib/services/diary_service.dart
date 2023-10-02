@@ -4,10 +4,8 @@ import 'package:mind_control/models/task.dart';
 import 'package:mind_control/utils/dio_client.dart';
 
 class DiaryService {
-  static DioClient dioClient = DioClient();
-
   static Future<Response> delete(String id) async {
-    final res = await dioClient.delete('/diaries/$id');
+    final res = await DioClient.delete('/diaries/$id');
     return res;
   }
 
@@ -27,11 +25,11 @@ class DiaryService {
       'goals': goals
     };
 
-    return await dioClient.post('/diaries', data);
+    return await DioClient.post('/diaries', data);
   }
 
   static Future<List<Diary>> getList() async {
-    final res = await dioClient.get('/diaries');
+    final res = await DioClient.get('/diaries');
 
     if (res.statusCode == 200) {
       return dairyFromJson(res.data);
