@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mind_control/utils/storage_client.dart';
 
 class LogoutTile extends StatelessWidget {
   const LogoutTile({
@@ -32,8 +32,7 @@ class LogoutTile extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                final storage = FlutterSecureStorage();
-                storage.delete(key: 'token');
+                StorageClient.deleteToken();
                 Navigator.popUntil(context, (route) => route.isFirst);
               },
               child: const Text(

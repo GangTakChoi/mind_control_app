@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_control/services/user_service.dart';
 import 'package:mind_control/utils/loading.dart';
+import 'package:mind_control/utils/storage_client.dart';
 import 'package:mind_control/utils/show_dialog.dart';
 
 class DeleteUserTile extends StatelessWidget {
@@ -25,8 +25,8 @@ class DeleteUserTile extends StatelessWidget {
       await showDialog1(context,
           title: '오류발생',
           content: '탈퇴를 실패하였습니다.\n문제가 지속되는 경우 재 로그인하여 다시 시도해주세요.');
-      final storage = FlutterSecureStorage();
-      storage.delete(key: 'token');
+      StorageClient.deleteToken();
+
       Navigator.pop(context);
       return;
     }

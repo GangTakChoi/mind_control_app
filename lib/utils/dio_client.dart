@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class DioClient extends Interceptor {
   static Dio dio = Dio();
@@ -39,7 +38,8 @@ class DioClient extends Interceptor {
     return res;
   }
 
-  static Future<dynamic> post(String path, Map<String, dynamic> data) async {
+  static Future<Response<dynamic>> post(
+      String path, Map<String, dynamic> data) async {
     final res = await dio.post(path, data: data);
     return res;
   }
