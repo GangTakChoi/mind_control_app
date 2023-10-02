@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_control/utils/loading.dart';
 
 Future<dynamic> showDialog1(context, {title = String, content = String}) {
   return showDialog(
@@ -49,8 +50,10 @@ Future<dynamic> showDialogConfirm(context, Function onPressed,
           ),
         ),
         TextButton(
-          onPressed: () {
-            onPressed();
+          onPressed: () async {
+            LoadingBar.show(context);
+            await onPressed();
+            LoadingBar.down(context);
             Navigator.pop(context, 'Ok');
           },
           child: Text(

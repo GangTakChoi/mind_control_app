@@ -52,9 +52,10 @@ class _GoalMgmtPageState extends State<GoalMgmtPage> {
         ),
         onPressed: () {
           showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (context) => AddGoalScreen());
+            isScrollControlled: true,
+            context: context,
+            builder: (context) => AddGoalScreen(),
+          );
         },
       ),
       body: Container(

@@ -67,7 +67,7 @@ class WriteDayProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteTask(Goal taskToDelete) async {
+  Future<void> deleteTask(Goal taskToDelete) async {
     final taskId = taskToDelete.id;
     await goalService.delete(taskId);
     _task.remove(taskToDelete);

@@ -7,6 +7,7 @@ import 'package:mind_control/components/input_text_with_label.dart';
 import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/screens/privacy_page.dart';
 import 'package:mind_control/services/user_service.dart';
+import 'package:mind_control/utils/loading.dart';
 
 import 'package:mind_control/utils/show_dialog.dart';
 
@@ -52,10 +53,13 @@ class _SignUpPageState extends State<SignUpPage> {
       return showDialog1(context, title: '동의', content: '개인정보처리방침에 동의해주세요.');
     }
 
+    LoadingBar.show(context);
+
     // 아이디 중복확인
     bool isValid = await userService.getIsValidId(accountId);
     if (!isValid) {
       if (!mounted) return;
+      LoadingBar.down(context);
       return showDialog1(context, title: '아이디 중복', content: '이미 사용중인 아이디입니다.');
     }
 
@@ -64,6 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
     Response res = await userService.create(data);
 
     if (res.statusCode == 201) {
+      LoadingBar.down(context);
       showDialog1(context, title: '가입완료', content: '가입이 완료되었습니다!')
           .then((value) => Navigator.pop(context));
     }

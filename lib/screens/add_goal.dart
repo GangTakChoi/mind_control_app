@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/services/goal_service.dart';
+import 'package:mind_control/utils/loading.dart';
 import 'package:provider/provider.dart';
 
 class AddGoalScreen extends StatelessWidget {
@@ -32,11 +33,15 @@ class AddGoalScreen extends StatelessWidget {
               onPressed: () async {
                 if (addingTaskText == '') return;
 
+                LoadingBar.show(context);
+
                 GoalService goalService = GoalService();
                 await goalService.create(addingTaskText);
 
                 Provider.of<WriteDayProvider>(context, listen: false)
                     .setTasks();
+
+                LoadingBar.down(context);
 
                 Navigator.pop(context);
               },

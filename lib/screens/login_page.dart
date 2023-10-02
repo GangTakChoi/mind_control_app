@@ -5,6 +5,7 @@ import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/screens/sign_up.dart';
 import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/services/user_service.dart';
+import 'package:mind_control/utils/loading.dart';
 import 'package:mind_control/utils/show_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -35,15 +36,19 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
+    LoadingBar.show(context);
+
     String? token = await userService.login(accountId, password);
 
     if (token == null) {
       if (!mounted) return;
+      LoadingBar.down(context);
       showDialog1(context, title: '로그인 실패', content: '일치하는 회원정보가 없습니다.');
       return;
     }
 
     if (!mounted) return;
+    LoadingBar.down(context);
     Provider.of<RootProvider>(context, listen: false)
         .updateIndexForPage(context, 0);
   }

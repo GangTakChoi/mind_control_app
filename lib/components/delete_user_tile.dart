@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mind_control/services/user_service.dart';
+import 'package:mind_control/utils/loading.dart';
 import 'package:mind_control/utils/show_dialog.dart';
 
 class DeleteUserTile extends StatelessWidget {
@@ -10,8 +11,13 @@ class DeleteUserTile extends StatelessWidget {
   });
 
   void deleteMe(context) async {
+    LoadingBar.show(context);
+
     UserService userService = UserService();
     final isSuccess = await userService.delete();
+
+    LoadingBar.down(context);
+
     if (isSuccess) {
       await showDialog1(context, title: '탈퇴완료', content: '탈퇴가 완료되었습니다.');
       Navigator.popUntil(context, (route) => route.isFirst);

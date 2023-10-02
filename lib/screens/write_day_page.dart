@@ -8,6 +8,7 @@ import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/components/selectable_box.dart';
 import 'package:mind_control/screens/goal_mgmt_page.dart';
 import 'package:mind_control/services/diary_service.dart';
+import 'package:mind_control/utils/loading.dart';
 import 'package:mind_control/utils/show_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_control/components/goal_checking_list.dart';
@@ -43,6 +44,8 @@ class _WriteDayPageState extends State<WriteDayPage> {
   }
 
   void save() async {
+    LoadingBar.show(context);
+
     final List<Goal> tasks =
         Provider.of<WriteDayProvider>(context, listen: false).tasks;
     final String content =
@@ -54,12 +57,18 @@ class _WriteDayPageState extends State<WriteDayPage> {
 
     final res = await dailyService.create(content, feeling, tasks);
 
+    if (!mounted) return;
+    LoadingBar.down(context);
+
     if (res.statusCode == 201) {
       await showDialog1(context, title: '저장완료', content: '저장완료 되었습니다!');
+      if (!mounted) return;
       Provider.of<WriteDayProvider>(context, listen: false).init();
       Provider.of<RootProvider>(context, listen: false)
           .updateIndexForPage(context, 1);
     } else {
+      await showDialog1(context,
+          title: '저장실패', content: '저장에 실패하였습니다.\n재시도 및 앱을 재가동해주세요.');
       // 실패
     }
   }

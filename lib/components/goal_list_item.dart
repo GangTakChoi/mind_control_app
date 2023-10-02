@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_control/constants.dart';
 import 'package:mind_control/models/task.dart';
 import 'package:mind_control/providers/write_day_provider.dart';
+import 'package:mind_control/utils/loading.dart';
 import 'package:provider/provider.dart';
 
 class GoalListItem extends StatelessWidget {
@@ -45,9 +46,12 @@ class GoalListItem extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      Provider.of<WriteDayProvider>(context, listen: false)
+                    onPressed: () async {
+                      LoadingBar.show(context);
+                      await Provider.of<WriteDayProvider>(context,
+                              listen: false)
                           .deleteTask(task);
+                      LoadingBar.down(context);
                       Navigator.pop(context, 'OK');
                     },
                     child: const Text(
