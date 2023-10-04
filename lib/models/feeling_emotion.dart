@@ -1,5 +1,4 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mind_control/constants.dart';
 
 enum FeelingValue {
   soHappy,

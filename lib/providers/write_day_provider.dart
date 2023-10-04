@@ -5,7 +5,6 @@ import 'package:mind_control/models/feeling_emotion.dart';
 import 'package:mind_control/models/task.dart';
 import 'package:mind_control/constants.dart';
 
-import '../models/diary.dart';
 import '../services/goal_service.dart';
 
 class WriteDayProvider extends ChangeNotifier {

@@ -4,7 +4,6 @@ import 'package:mind_control/components/record_day_item_expand.dart';
 import 'package:mind_control/constants.dart';
 import 'package:mind_control/models/diary.dart';
 import 'package:mind_control/services/diary_service.dart';
-import 'package:mind_control/utils/loading.dart';
 import 'package:mind_control/utils/show_dialog.dart';
 import 'package:mind_control/utils/toast.dart';
 
@@ -12,7 +11,7 @@ class DiaryItem extends StatefulWidget {
   DiaryItem({required this.diary, required this.removeDiary});
 
   final Diary diary;
-  Function removeDiary;
+  final Function removeDiary;
 
   @override
   State<DiaryItem> createState() => _DiaryItemState();
@@ -47,16 +46,16 @@ class _DiaryItemState extends State<DiaryItem> {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                widget.diary.date,
-                style: TextStyle(color: Colors.white),
-              ),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
+              ),
+              child: Text(
+                widget.diary.date,
+                style: TextStyle(color: Colors.white),
               ),
             ),
             InkWell(

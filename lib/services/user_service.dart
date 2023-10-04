@@ -28,7 +28,7 @@ class UserService {
 
         return token;
       }
-    } on DioException catch (err) {
+    } on DioException {
       return null;
     }
     return null;

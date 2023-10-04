@@ -129,32 +129,37 @@ class _LoginPageState extends State<LoginPage> {
                         password = value;
                       },
                     ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 3),
-                      child: Row(children: [
-                        SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: Checkbox(
-                            value: isKeepLogin,
-                            shape: CircleBorder(),
-                            onChanged: (value) {
-                              setState(() {
-                                isKeepLogin = value!;
-                              });
-                            },
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          isKeepLogin = !isKeepLogin;
+                        });
+                      },
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 3),
+                        child: Row(children: [
+                          SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: Checkbox(
+                              value: isKeepLogin,
+                              shape: CircleBorder(),
+                              onChanged: (value) {
+                                setState(() {
+                                  isKeepLogin = value!;
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                        Text(
-                          '  로그인 유지',
-                          style: TextStyle(color: Colors.black87, fontSize: 14),
-                        )
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 15,
+                          Text(
+                            '  로그인 유지',
+                            style:
+                                TextStyle(color: Colors.black87, fontSize: 14),
+                          )
+                        ]),
+                      ),
                     ),
                     PrimaryButton(
                       title: '로그인',
