@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:mind_control/utils/dio_client.dart';
-import 'package:mind_control/utils/storage_client.dart';
 
 class UserService {
   Future<bool> getIsValidId(String accountId) async {
@@ -25,12 +24,11 @@ class UserService {
       final res = await DioClient.post('/auth/login', data);
       if (res.statusCode == 201) {
         final token = res.data['access_token'];
-        StorageClient.setToken(token);
-        DioClient.dio.options.headers = {'Authorization': 'Bearer $token'};
+        DioClient.setToken(token);
 
         return token;
       }
-    } on DioException {
+    } on DioException catch (err) {
       return null;
     }
     return null;

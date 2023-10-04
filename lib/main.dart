@@ -4,6 +4,7 @@ import 'package:mind_control/providers/write_day_provider.dart';
 import 'package:mind_control/screens/more_page.dart';
 import 'package:mind_control/screens/privacy_page.dart';
 import 'package:mind_control/screens/terms_page.dart';
+import 'package:mind_control/utils/app_navigator.dart';
 import 'package:mind_control/utils/dio_client.dart';
 import 'screens/login_page.dart';
 import 'package:mind_control/screens/sign_up.dart';
@@ -15,7 +16,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DioClient();
+  DioClient(isDevMode: false);
   runApp(const MyApp());
 }
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: buildMaterialColor(Color(0xff999CEE)),
         ),
         home: LoginPage(),
-        // home: SignUpPage(),
+        navigatorKey: AppNavigator.instance.navigatorKey,
         initialRoute: LoginPage.id,
         routes: {
           LoginPage.id: (context) => LoginPage(),

@@ -33,6 +33,7 @@ class LogoutTile extends StatelessWidget {
             TextButton(
               onPressed: () {
                 StorageClient.deleteToken();
+                StorageClient.setIsKeepLogin(false);
                 Navigator.popUntil(context, (route) => route.isFirst);
               },
               child: const Text(

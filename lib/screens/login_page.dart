@@ -5,8 +5,10 @@ import 'package:mind_control/providers/root_provider.dart';
 import 'package:mind_control/screens/sign_up.dart';
 import 'package:mind_control/components/primary_button.dart';
 import 'package:mind_control/services/user_service.dart';
+import 'package:mind_control/utils/dio_client.dart';
 import 'package:mind_control/utils/loading.dart';
 import 'package:mind_control/utils/show_dialog.dart';
+import 'package:mind_control/utils/storage_client.dart';
 import 'package:provider/provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -24,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   String accountId = '';
   String password = '';
   String appVersion = '';
+  bool isKeepLogin = false;
   UserService userService = UserService();
 
   void login() async {
@@ -37,17 +40,20 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     LoadingBar.show(context);
-
     String? token = await userService.login(accountId, password);
+    if (!mounted) return;
 
     if (token == null) {
-      if (!mounted) return;
       LoadingBar.down(context);
       showDialog1(context, title: '로그인 실패', content: '일치하는 회원정보가 없습니다.');
       return;
     }
 
-    if (!mounted) return;
+    if (isKeepLogin) {
+      StorageClient.setToken(token);
+      StorageClient.setIsKeepLogin(isKeepLogin);
+    }
+
     LoadingBar.down(context);
     Provider.of<RootProvider>(context, listen: false)
         .updateIndexForPage(context, 0);
@@ -57,6 +63,16 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    StorageClient.getIsKeepLogin().then((isKeepLoginP) async {
+      if (!isKeepLoginP) return;
+      final String token = await StorageClient.getToken() ?? '';
+      if (!mounted) return;
+
+      DioClient.setToken(token);
+      Provider.of<RootProvider>(context, listen: false)
+          .updateIndexForPage(context, 0);
+    });
 
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
@@ -113,8 +129,32 @@ class _LoginPageState extends State<LoginPage> {
                         password = value;
                       },
                     ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 3),
+                      child: Row(children: [
+                        SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: Checkbox(
+                            value: isKeepLogin,
+                            shape: CircleBorder(),
+                            onChanged: (value) {
+                              setState(() {
+                                isKeepLogin = value!;
+                              });
+                            },
+                          ),
+                        ),
+                        Text(
+                          '  로그인 유지',
+                          style: TextStyle(color: Colors.black87, fontSize: 14),
+                        )
+                      ]),
+                    ),
                     SizedBox(
-                      height: 50.0,
+                      height: 15,
                     ),
                     PrimaryButton(
                       title: '로그인',

@@ -7,7 +7,6 @@ import 'package:mind_control/components/my_bottom_navigation_bar.dart';
 import 'package:mind_control/constants.dart';
 import 'package:mind_control/screens/goal_mgmt_page.dart';
 import 'package:mind_control/screens/privacy_page.dart';
-import 'package:mind_control/screens/terms_page.dart';
 
 class MorePage extends StatelessWidget {
   static const id = 'more_page';
@@ -54,15 +53,6 @@ class MorePage extends StatelessWidget {
                       ),
                       onTap: () => Navigator.pushNamed(context, PrivacyPage.id),
                     ),
-                    // ListTile(
-                    //   contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                    //   leading: SvgPicture.asset('images/document.svg'),
-                    //   title: Text(
-                    //     '이용약관',
-                    //     style: TextStyle(fontSize: 22),
-                    //   ),
-                    //   onTap: () => Navigator.pushNamed(context, TermsPage.id),
-                    // ),
                     getDivider(),
                     LogoutTile(),
                     DeleteUserTile(),
